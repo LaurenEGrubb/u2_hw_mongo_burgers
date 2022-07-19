@@ -1,33 +1,36 @@
 // create 5 burgers (at least 3 should be beef)
+db.burgers.insertMany([{protein:"beef",cheese:"yes",toppings:"hot fudge"},{protein:"beef",cheese:"no",toppings:"ketchup"},{protein:"beef",cheese:"yes",toppings:"onions"},{protein:"beef",cheese:"yes",toppings:"tabasco"},{protein:"emu",cheese:"yes",toppings:"kimchi"},{protein:"elk",cheese:"no",toppings:"french fries"}])
 
 // find all the burgers
-
+db.burgers.find()
 // show just the meat of each burger
-
+db.burgers.find({protein})
 // show just the toppings of each burger
-
+db.burgers.find({protein:1})
 // show everything but the cheese
-
+db.burgers.find({protein:1,toppings:1})
 // find all the burgers with beef
-
+db.burgers.find({protein:"beef"})
 // find all the burgers that are not beef
-
+db.burgers.find({protein:{$ne:"beef"}})
 // find the first burger with cheese
-
+db.burgers.findOne({cheese:"yes"})
 // find one and update the first burger with cheese to have a property of 'double cheese'
-
+db.burgers.updateOne({cheese:"yes"},{$set:{cheese:"double cheese"},$currentDate:{lastModified:true}})
 // find the burger you updated to have double cheese
-
+db.burgers.find({cheese:"double cheese"})
 // find and update all the beef burgers to be 'veggie'
-
+db.burgers.updateMany({protein:{$eq:"beef"}},{$set:{protein:"veggie"},$currentDate:{lastModified:true}})
 // delete one of your veggie burgers
+db.burgers.deleteOne({protein:"veggie"})
 // WRONG - dELETES ALL : db.burger.remove({meat: 'veggie'})
 
 // drop the collection
 //Expected Output
 //true
-
+db.<burgers>.drop()
 // drop the database
+db.dropDatabase()
 //Expected Output
 // {
 //   "dropped": "burgers",
